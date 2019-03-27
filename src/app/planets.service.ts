@@ -6,7 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+//import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Injectable()
 export class PlanetsService {
