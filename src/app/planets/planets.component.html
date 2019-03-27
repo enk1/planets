@@ -1,0 +1,21 @@
+<h2>My Planets</h2>
+<nav>
+  <div class="pagination">
+    <span (click)="setPage('left')" class="left"> left </span>
+    <span class="right" (click)="setPage('right')"> right </span>
+  </div>
+
+  <select (change)="fetchRecords()" [(ngModel)]="selectedOption" name="gender">
+    <option *ngFor="let option of selectOptions" [value]="option">
+      {{option}}
+    </option>
+  </select>
+</nav>
+
+<ul class="planets">
+  <li *ngFor="let planet of planets">
+    <a routerLink="/detail/{{planet.id}}">
+      <span class="badge">{{planet.name}}</span> {{planet.population}}
+    </a>
+  </li>
+</ul>

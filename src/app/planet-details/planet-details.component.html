@@ -1,0 +1,18 @@
+<div *ngIf="planet">
+  <h2>Details of {{planet.name}} planet</h2>
+  <div><span>Climate: </span>{{planet.climate}}</div>
+  <div><span>Diameter: </span>{{planet.diameter}}</div>
+  <div><span>Edited: </span>{{planet.edited}}</div>
+  <div><span>Gravity: </span>{{planet.gravity}}</div>
+  <div><span>Population: </span>{{planet.population}}</div>
+  <div><span>Orbital period: </span>{{planet.orbital_period}}</div>
+  <div><span>Rotation period: </span>{{planet.rotation_period}}</div>
+  <div><span>Surface water: </span>{{planet.surface_water}}</div>
+  <div><span>Terrain: </span>{{planet.terrain}}</div>
+  <div><span>Url: </span>{{planet.url}}</div>
+  <div><span>ID: </span>{{planet.id}}</div>
+
+  <div>
+    <button (click)="goBack()">go back</button>
+  </div>
+</div>
