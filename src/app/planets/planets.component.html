@@ -1,12 +1,11 @@
 <h2>My Planets</h2>
 <nav>
   <div class="pagination">
-    <span (click)="setPage('left')" class="left"> left </span>
-    <span class="right" (click)="setPage('right')"> right </span>
+    <span (click)="changePage('left')" class="left"> left </span>
+    <span class="right" (click)="changePage('right')"> right </span>
   </div>
-
-  <select (change)="fetchRecords()" [(ngModel)]="selectedOption" name="gender">
-    <option *ngFor="let option of selectOptions" [value]="option">
+  <select (change)="changeSizePage()" [(ngModel)]="pageSize" name="gender">
+    <option *ngFor="let option of pageSizeOptions" [value]="option">
       {{option}}
     </option>
   </select>

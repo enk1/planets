@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PlanetsService } from '../planets.service';
-import { Planet } from '../planet';
+import { Planet } from '../model/planet';
 
 @Component({
   selector: 'app-planet-details',
