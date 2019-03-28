@@ -34,9 +34,6 @@ export class PlanetsService {
       size > this.countAPI
         ? Math.ceil(this.countAPI / this.paginationAPI)
         : Math.ceil(size / this.paginationAPI);
-    // for (let i = 1; i <= numberOfRequests; i++) {
-    //   this.getPlanets(i);
-    // }
     return <Observable<Planet[]>>(
       forkJoin(
         Array.from({ length: numberOfRequests }, (v, k) => k + 1).map(

@@ -16,6 +16,7 @@ export class PlanetsComponent implements OnInit {
   public pagination: number;
 
   changeSizePage(): void {
+    this.planets.length = 0;
     switch (this.pageSize) {
       case '5':
         this.fetchPlanets(this.currentPage, 5);
@@ -49,8 +50,7 @@ export class PlanetsComponent implements OnInit {
       this.planetService
         .getSetBySizePage(currentPage, currentSize)
         .subscribe(planets => {
-          console.log(planets);
-          this.planets = planets;
+          this.planets = [...this.planets, ...planets];
         });
     } else {
       this.planetService.getPlanets().subscribe(planets => {
