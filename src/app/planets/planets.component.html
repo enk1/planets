@@ -1,10 +1,9 @@
-<h2>My Planets</h2>
 <nav>
   <div class="pagination">
-    <span (click)="changePage('left')" class="left"> left </span>
-    <span class="right" (click)="changePage('right')"> right </span>
+    <button (click)="changePage('left')" class="left"> left </button>
+    <button class="right" (click)="changePage('right')"> right </button>
   </div>
-  <select (change)="changeSizePage()" [(ngModel)]="pageSize" name="gender">
+  <select (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
     <option *ngFor="let option of pageSizeOptions" [value]="option">
       {{option}}
     </option>

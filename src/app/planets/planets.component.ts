@@ -11,13 +11,15 @@ export class PlanetsComponent implements OnInit {
   planets: Planet[];
 
   public pageSizeOptions = [5, 10, 25, 100];
-  public pageSize: string;
+  public currentSize: string;
   public currentPage: number;
   public pagination: number;
+  public countAPI = 61;
 
   changeSizePage(): void {
     this.planets.length = 0;
-    switch (this.pageSize) {
+    this.pagination = Math.ceil(+this.currentSize / this.countAPI);
+    switch (this.currentSize) {
       case '5':
         this.fetchPlanets(this.currentPage, 5);
         break;
@@ -34,12 +36,13 @@ export class PlanetsComponent implements OnInit {
   }
 
   changePage(direction?: string): void {
+    this.planets.length = 0;
     if (direction === 'left' && this.currentPage > 1) {
       this.currentPage -= 1;
-      this.fetchPlanets(this.currentPage);
+      this.fetchPlanets(this.currentPage, +this.currentSize);
     } else if (direction === 'right' && this.currentPage < this.pagination) {
       this.currentPage += 1;
-      this.fetchPlanets(this.currentPage);
+      this.fetchPlanets(this.currentPage, +this.currentSize);
     } else {
       this.fetchPlanets();
     }
@@ -62,9 +65,9 @@ export class PlanetsComponent implements OnInit {
   constructor(private planetService: PlanetsService) {}
 
   ngOnInit() {
-    this.pageSize = '10';
+    this.currentSize = '10';
     this.currentPage = 1;
     this.pagination = 6;
-    this.changePage();
+    this.fetchPlanets();
   }
 }
