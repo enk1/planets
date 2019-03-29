@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
-
 @Injectable()
 export class PlanetsService {
   private apiUrl = 'https://swapi.co/api/planets/';
@@ -24,13 +23,19 @@ export class PlanetsService {
     }
   }
 
-  calcRequestsBySizeAndPage(pageSize: number, currentPage: number): Array<number> {
-    const coefficient =  Math.ceil(pageSize / this.paginationAPI);
-    const upperBound = Math.ceil(pageSize * currentPage / this.paginationAPI);
+  calcRequestsBySizeAndPage(
+    pageSize: number,
+    currentPage: number
+  ): Array<number> {
+    const coefficient = Math.ceil(pageSize / this.paginationAPI);
+    const upperBound = Math.ceil((pageSize * currentPage) / this.paginationAPI);
     const lowerBound = upperBound - coefficient + 1;
     console.log('pageSize ', pageSize);
     console.log('currentPage ', currentPage);
-    return Array.from({ length: coefficient }, (x, index) => lowerBound + index);
+    return Array.from(
+      { length: coefficient },
+      (x, index) => lowerBound + index
+    );
   }
 
   getIdFromUrl(url: string): string {
@@ -38,11 +43,10 @@ export class PlanetsService {
     return url.match(regex)[0];
   }
 
-  getSetBySizePage(currentPage?: number, currentSize?: number): Observable<Planet[]> {
-    const numberOfRequests =
-    currentSize > this.countAPI
-        ? Math.ceil(this.countAPI / this.paginationAPI)
-        : Math.ceil(currentSize / this.paginationAPI);
+  getSetBySizePage(
+    currentPage?: number,
+    currentSize?: number
+  ): Observable<Planet[]> {
     return <Observable<Planet[]>>(
       forkJoin(
         this.calcRequestsBySizeAndPage(currentSize, currentPage).map(

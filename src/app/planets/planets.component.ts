@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Planet } from '../model/planet';
 import { PlanetsService } from '../planets.service';
+import 'rxjs/add/operator/take';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planets',
@@ -18,7 +20,7 @@ export class PlanetsComponent implements OnInit {
 
   changeSizePage(): void {
     this.planets.length = 0;
-    this.pagination = Math.ceil(+this.currentSize / this.countAPI);
+    this.pagination = Math.ceil(this.countAPI / +this.currentSize);
     switch (this.currentSize) {
       case '5':
         this.fetchPlanets(this.currentPage, 5);
@@ -37,11 +39,10 @@ export class PlanetsComponent implements OnInit {
 
   changePage(direction?: string): void {
     this.planets.length = 0;
-    console.log(this.pagination)
     if (direction === 'left' && this.currentPage > 1) {
       this.currentPage -= 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
-    } else if (direction === 'right' && this.currentPage <= this.pagination) {
+    } else if (direction === 'right' && this.currentPage < this.pagination) {
       this.currentPage += 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
     }
@@ -52,16 +53,35 @@ export class PlanetsComponent implements OnInit {
       if (currentSize === 5 || currentSize === 25) {
         if (currentPage % 2 === 0) {
           this.planetService
-          .getSetBySizePage(currentPage, currentSize)
-          .subscribe(planets => {
-            this.planets = [...this.planets, ...planets].slice(currentSize, planets.length);
-          });
+            .getSetBySizePage(currentPage, currentSize)
+            .subscribe(
+              planets => {
+                this.planets = [...this.planets, ...planets];
+              },
+              err => {
+                console.error(err);
+              },
+              () => {
+                this.planets = this.planets.slice(
+                  this.planets.length - currentSize,
+                  this.planets.length
+                );
+              }
+            );
         } else {
           this.planetService
-          .getSetBySizePage(currentPage, currentSize)
-          .subscribe(planets => {
-            this.planets = [...this.planets, ...planets].slice(0, currentSize);
-          });
+            .getSetBySizePage(currentPage, currentSize)
+            .subscribe(
+              planets => {
+                this.planets = [...this.planets, ...planets];
+              },
+              err => {
+                console.error(err);
+              },
+              () => {
+                this.planets = this.planets.slice(0, currentSize);
+              }
+            );
         }
       } else {
         this.planetService
@@ -75,18 +95,6 @@ export class PlanetsComponent implements OnInit {
         this.planets = planets;
       });
     }
-
-    // if (currentPage) {
-    //   this.planetService
-    //     .getSetBySizePage(currentPage, currentSize)
-    //     .subscribe(planets => {
-    //       this.planets = [...this.planets, ...planets];
-    //     });
-    // } else {
-    //   this.planetService.getPlanets().subscribe(planets => {
-    //     this.planets = planets;
-    //   });
-    // }
   }
 
   constructor(private planetService: PlanetsService) {}
