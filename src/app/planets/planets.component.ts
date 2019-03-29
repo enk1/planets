@@ -37,29 +37,56 @@ export class PlanetsComponent implements OnInit {
 
   changePage(direction?: string): void {
     this.planets.length = 0;
+    console.log(this.pagination)
     if (direction === 'left' && this.currentPage > 1) {
       this.currentPage -= 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
-    } else if (direction === 'right' && this.currentPage < this.pagination) {
+    } else if (direction === 'right' && this.currentPage <= this.pagination) {
       this.currentPage += 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
-    } else {
-      this.fetchPlanets();
     }
   }
 
   fetchPlanets(currentPage?: number, currentSize?: number): void {
     if (currentPage) {
-      this.planetService
-        .getSetBySizePage(currentPage, currentSize)
-        .subscribe(planets => {
-          this.planets = [...this.planets, ...planets];
-        });
+      if (currentSize === 5 || currentSize === 25) {
+        if (currentPage % 2 === 0) {
+          this.planetService
+          .getSetBySizePage(currentPage, currentSize)
+          .subscribe(planets => {
+            this.planets = [...this.planets, ...planets].slice(currentSize, planets.length);
+          });
+        } else {
+          this.planetService
+          .getSetBySizePage(currentPage, currentSize)
+          .subscribe(planets => {
+            this.planets = [...this.planets, ...planets].slice(0, currentSize);
+          });
+        }
+      } else {
+        this.planetService
+          .getSetBySizePage(currentPage, currentSize)
+          .subscribe(planets => {
+            this.planets = [...this.planets, ...planets];
+          });
+      }
     } else {
       this.planetService.getPlanets().subscribe(planets => {
         this.planets = planets;
       });
     }
+
+    // if (currentPage) {
+    //   this.planetService
+    //     .getSetBySizePage(currentPage, currentSize)
+    //     .subscribe(planets => {
+    //       this.planets = [...this.planets, ...planets];
+    //     });
+    // } else {
+    //   this.planetService.getPlanets().subscribe(planets => {
+    //     this.planets = planets;
+    //   });
+    // }
   }
 
   constructor(private planetService: PlanetsService) {}
