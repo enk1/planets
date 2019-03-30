@@ -21,14 +21,15 @@
 
   <ul class="planets__list">
     <li *ngFor="let planet of planets" routerLink="/detail/{{planet.id}}">
-      <div>
-        <span class="badge">{{planet.name}}</span> population: {{planet.population}}
-        <span class="planet__list-hidden">
-          population: {{planet.population}}
-          name: {{planet.name}}
-          population: {{planet.population}}
-          name: {{planet.name}}
-        </span>
+      <div class="planets__info">
+        <div class="info__badge">{{planet.name}}</div>
+        <div class="info__container">
+          <span class="info__shortcut">population: {{planet.population}}</span>
+          <span class="info__list-hidden">
+            terrain: {{planet.terrain}}<br>
+            climate: {{planet.climate}}
+          </span>
+        </div>
       </div>
     </li>
   </ul>
