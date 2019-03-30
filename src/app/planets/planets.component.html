@@ -1,19 +1,21 @@
-<nav>
-  <div class="pagination">
-    <button (click)="changePage('left')" class="left"> left </button>
-    <button class="right" (click)="changePage('right')"> right </button>
-  </div>
-  <select (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
-    <option *ngFor="let option of pageSizeOptions" [value]="option">
-      {{option}}
-    </option>
-  </select>
-</nav>
+<div class="planets__wrapper">
+  <nav>
+    <div class="pagination">
+      <button class="btn left" (click)="changePage('left')" [disabled]="currentPage <= 1"> <a>left</a> </button>
+      <button class="btn right" (click)="changePage('right')" [disabled]="currentPage > pagination"> right </button>
+    </div>
+    <select (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
+      <option *ngFor="let option of pageSizeOptions" [value]="option">
+        {{option}}
+      </option>
+    </select>
+  </nav>
 
-<ul class="planets">
-  <li *ngFor="let planet of planets">
-    <a routerLink="/detail/{{planet.id}}">
-      <span class="badge">{{planet.name}}</span> {{planet.population}}
-    </a>
-  </li>
-</ul>
+  <ul class="planets">
+    <li *ngFor="let planet of planets">
+      <a routerLink="/detail/{{planet.id}}">
+        <span class="badge">{{planet.name}}</span> {{planet.population}}
+      </a>
+    </li>
+  </ul>
+</div>

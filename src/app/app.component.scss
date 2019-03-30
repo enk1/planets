@@ -1,0 +1,33 @@
+.wrapper {
+  background: #b3b8d0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 5.5fr 1fr;
+  grid-template-areas:
+    ". h ."
+    ". a ."
+    ". . .";
+}
+
+h1 {
+  grid-area: h;
+}
+
+app-planets {
+  width: 100%;
+  height: 100%;
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}
+
+@media all and (-ms-high-contrast:none) {
+  .wrapper {
+    display: -ms-grid;
+    -ms-grid-columns: 1fr 1.5fr 1fr;
+    -ms-grid-rows: 1fr 4.5fr 1fr;
+  }
+
+}

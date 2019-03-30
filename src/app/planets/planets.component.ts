@@ -39,10 +39,11 @@ export class PlanetsComponent implements OnInit {
 
   changePage(direction?: string): void {
     this.planets.length = 0;
+    console.log('pagination', this.pagination);
     if (direction === 'left' && this.currentPage > 1) {
       this.currentPage -= 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
-    } else if (direction === 'right' && this.currentPage < this.pagination) {
+    } else if (direction === 'right' && this.currentPage <= this.pagination) {
       this.currentPage += 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
     }
