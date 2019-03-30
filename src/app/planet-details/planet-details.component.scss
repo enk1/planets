@@ -1,1 +1,83 @@
-@import '../../styles'
+@import './../../scss/variables';
+
+.details__wrapper {
+  position: relative;
+  transition: color 0.25s;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  line-height: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1em;
+    line-height: 2.35rem;
+  }
+
+  div:hover {
+    text-decoration: underline;
+    cursor: default;
+    transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.draw-border {
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+    content: '';
+    position: absolute;
+    transition: color 0.25s;
+  }
+
+  padding: 1rem;
+  border: 2px solid transparent;
+  animation: drawLines ease-in 1;
+  animation-fill-mode: forwards;
+  animation-duration: 1.5s;
+  animation-delay: 0.7s;
+}
+
+@keyframes drawLines {
+  0% {
+    border-color: transparent;
+  }
+
+  25% {
+    border-top-color: #3f51b5;
+  }
+
+  50% {
+    border-top-color: #3f51b5;
+    border-left-color: #3f51b5;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+  }
+
+  75% {
+    border-top-color: #3f51b5;
+    border-left-color: #3f51b5;
+    border-bottom-color: #3f51b5;
+    border-right-color: transparent;
+    background: none;
+  }
+
+  100% {
+    border-top-color: #3f51b5;
+    border-left-color: #3f51b5;
+    border-bottom-color: #3f51b5;
+    border-right-color: #3f51b5;
+    background: #42a5f5;
+  }
+}
+
+.btn-return {
+  color: #000;
+
+  fa {
+    font-size: 2rem;
+  }
+}

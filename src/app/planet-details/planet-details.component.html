@@ -1,5 +1,5 @@
-<div *ngIf="planet">
-  <h2>Details of {{planet.name}} planet</h2>
+<div *ngIf="planet" class="details__wrapper draw-border">
+  <h2>Details of planet {{planet.name}} </h2>
   <div><span>Climate: </span>{{planet.climate}}</div>
   <div><span>Diameter: </span>{{planet.diameter}}</div>
   <div><span>Edited: </span>{{planet.edited}}</div>
@@ -10,9 +10,10 @@
   <div><span>Surface water: </span>{{planet.surface_water}}</div>
   <div><span>Terrain: </span>{{planet.terrain}}</div>
   <div><span>Url: </span>{{planet.url}}</div>
-  <div><span>ID: </span>{{planet.id}}</div>
 
-  <div>
-    <button (click)="goBack()">go back</button>
-  </div>
+  <nav class="nav__wrapper">
+    <button class="btn btn-return" (click)="goBack()">
+      <fa name="backward"></fa>
+    </button>
+  </nav>
 </div>
