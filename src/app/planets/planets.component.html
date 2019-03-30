@@ -1,21 +1,35 @@
 <div class="planets__wrapper">
   <nav>
     <div class="pagination">
-      <button class="btn left" (click)="changePage('left')" [disabled]="currentPage <= 1"> <a>left</a> </button>
-      <button class="btn right" (click)="changePage('right')" [disabled]="currentPage > pagination"> right </button>
+      <button class="btn left" (click)="changePage('left')" [disabled]="currentPage <= 1">
+        <fa name="chevron-left"></fa>
+      </button>
+      <button class="btn right" (click)="changePage('right')" [disabled]="currentPage > pagination">
+        <fa name="chevron-right"></fa>
+      </button>
     </div>
-    <select (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
-      <option *ngFor="let option of pageSizeOptions" [value]="option">
-        {{option}}
-      </option>
-    </select>
+    <div class="select__wprapper">
+      <select class="select__pagination" (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
+        <option *ngFor="let option of pageSizeOptions" [value]="option">
+          {{option}}
+        </option>
+      </select>
+      <span class="select__highlight"></span>
+      <span class="select__bar"></span>
+    </div>
   </nav>
 
-  <ul class="planets">
-    <li *ngFor="let planet of planets">
-      <a routerLink="/detail/{{planet.id}}">
-        <span class="badge">{{planet.name}}</span> {{planet.population}}
-      </a>
+  <ul class="planets__list">
+    <li *ngFor="let planet of planets" routerLink="/detail/{{planet.id}}">
+      <div>
+        <span class="badge">{{planet.name}}</span> population: {{planet.population}}
+        <span class="planet__list-hidden">
+          population: {{planet.population}}
+          name: {{planet.name}}
+          population: {{planet.population}}
+          name: {{planet.name}}
+        </span>
+      </div>
     </li>
   </ul>
 </div>

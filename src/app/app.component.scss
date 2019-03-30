@@ -1,7 +1,8 @@
 .wrapper {
-  background: #b3b8d0;
+  background: #e3f2fd;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
   grid-template-rows: 1fr 5.5fr 1fr;
@@ -13,6 +14,30 @@
 
 h1 {
   grid-area: h;
+  position: relative;
+  font-size: 3rem;
+  align-self: center;
+  justify-self: center;
+  cursor: pointer;
+
+  span {
+    font-size: 3rem;
+
+    &:after {
+      position: absolute;
+      opacity: 0;
+      top: 0px;
+      transition: all 0.3s;
+      content: '{A5}';
+      right: 0px;
+      transform: translateX(100px);
+    }
+
+    &:hover:after {
+      opacity: 1;
+      transform: translateX(110px);
+    }
+  }
 }
 
 app-planets {

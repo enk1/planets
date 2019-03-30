@@ -9,6 +9,7 @@ import { PlanetsComponent } from './planets/planets.component';
 import { PlanetDetailsComponent } from './planet-details/planet-details.component';
 import { PlanetsService } from './planets.service';
 import { AppRoutingModule } from './app-routing.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [AppComponent, PlanetsComponent, PlanetDetailsComponent],
@@ -16,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AngularFontAwesomeModule,
     RouterModule,
     AppRoutingModule
   ],
