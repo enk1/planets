@@ -21,6 +21,10 @@ export class PlanetsComponent implements OnInit {
   changeSizePage(): void {
     this.planets.length = 0;
     this.pagination = Math.ceil(this.countAPI / +this.currentSize);
+    if (this.currentPage > this.pagination) {
+      this.currentPage = 1;
+    }
+
     switch (this.currentSize) {
       case '5':
         this.fetchPlanets(this.currentPage, 5);
@@ -103,7 +107,7 @@ export class PlanetsComponent implements OnInit {
   ngOnInit() {
     this.currentSize = '10';
     this.currentPage = 1;
-    this.pagination = 6;
+    this.pagination = 7;
     this.fetchPlanets();
   }
 }

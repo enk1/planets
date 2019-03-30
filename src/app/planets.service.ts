@@ -27,11 +27,14 @@ export class PlanetsService {
     pageSize: number,
     currentPage: number
   ): Array<number> {
+    if (pageSize > this.countAPI) pageSize = this.countAPI;
     const coefficient = Math.ceil(pageSize / this.paginationAPI);
     const upperBound = Math.ceil((pageSize * currentPage) / this.paginationAPI);
     const lowerBound = upperBound - coefficient + 1;
+
     console.log('pageSize ', pageSize);
     console.log('currentPage ', currentPage);
+
     return Array.from(
       { length: coefficient },
       (x, index) => lowerBound + index

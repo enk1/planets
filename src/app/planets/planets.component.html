@@ -4,10 +4,11 @@
       <button class="btn left" (click)="changePage('left')" [disabled]="currentPage <= 1">
         <fa name="chevron-left"></fa>
       </button>
-      <button class="btn right" (click)="changePage('right')" [disabled]="currentPage > pagination">
+      <button class="btn right" (click)="changePage('right')" [disabled]="currentPage >= pagination">
         <fa name="chevron-right"></fa>
       </button>
     </div>
+    <div class="pagination__counter">{{this.currentPage}} / {{this.pagination}}</div>
     <div class="select__wprapper">
       <select class="select__pagination" (change)="changeSizePage()" [(ngModel)]="currentSize" name="gender">
         <option *ngFor="let option of pageSizeOptions" [value]="option">
