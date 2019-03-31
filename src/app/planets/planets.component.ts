@@ -14,12 +14,12 @@ import { Subject } from 'rxjs/Subject';
 export class PlanetsComponent implements OnInit {
   planets: Planet[];
 
-  private pageSizeOptions = [5, 10, 25, 100];
-  private currentSize: string;
-  private currentPage: number;
-  private pagination: number;
+  public pageSizeOptions = [5, 10, 25, 100];
+  public currentSize: string;
+  public currentPage: number;
+  public pagination: number;
   private countAPI = 61;
-  private searchingValue: string;
+  public searchingValue: string;
   //private searchingValue = new Subject<string>();
 
   changeSizePage(): void {
@@ -57,7 +57,7 @@ export class PlanetsComponent implements OnInit {
     //   debounceTime(300),
     //   distinctUntilChanged(),
     //   switchMap((term: string) => this.searchService.searchPlanets(term))
-    // );
+    // );"https://enk1.github.io/planets/"
   }
 
   changePage(direction?: string): void {
