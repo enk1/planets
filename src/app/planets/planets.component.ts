@@ -57,7 +57,7 @@ export class PlanetsComponent implements OnInit {
     //   debounceTime(300),
     //   distinctUntilChanged(),
     //   switchMap((term: string) => this.searchService.searchPlanets(term))
-    // );"https://enk1.github.io/planets/"
+    // );
   }
 
   changePage(direction?: string): void {
