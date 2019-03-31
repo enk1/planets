@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Planet } from '../model/planet';
 import { PlanetsService } from '../planets.service';
+import { SearchPlanetsService } from '../search-planets.service';
 import 'rxjs/add/operator/take';
-import { take } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-planets',
@@ -12,11 +14,13 @@ import { take } from 'rxjs/operators';
 export class PlanetsComponent implements OnInit {
   planets: Planet[];
 
-  public pageSizeOptions = [5, 10, 25, 100];
-  public currentSize: string;
-  public currentPage: number;
-  public pagination: number;
-  public countAPI = 61;
+  private pageSizeOptions = [5, 10, 25, 100];
+  private currentSize: string;
+  private currentPage: number;
+  private pagination: number;
+  private countAPI = 61;
+  private searchingValue: string;
+  //private searchingValue = new Subject<string>();
 
   changeSizePage(): void {
     this.planets.length = 0;
@@ -41,9 +45,24 @@ export class PlanetsComponent implements OnInit {
     }
   }
 
+  search(): void {
+    if (this.searchingValue.length >= 3) {
+      this.searchService
+        .searchPlanets(this.searchingValue)
+        .subscribe(planets => {
+          this.planets = planets;
+        });
+    }
+    // this.planets = this.searchingValue.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   switchMap((term: string) => this.searchService.searchPlanets(term))
+    // );
+  }
+
   changePage(direction?: string): void {
     this.planets.length = 0;
-    console.log('pagination', this.pagination);
+
     if (direction === 'left' && this.currentPage > 1) {
       this.currentPage -= 1;
       this.fetchPlanets(this.currentPage, +this.currentSize);
@@ -102,7 +121,10 @@ export class PlanetsComponent implements OnInit {
     }
   }
 
-  constructor(private planetService: PlanetsService) {}
+  constructor(
+    private planetService: PlanetsService,
+    private searchService: SearchPlanetsService
+  ) {}
 
   ngOnInit() {
     this.currentSize = '10';

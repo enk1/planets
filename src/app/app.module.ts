@@ -10,9 +10,11 @@ import { PlanetDetailsComponent } from './planet-details/planet-details.componen
 import { PlanetsService } from './planets.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { SearchPlanetsService } from './search-planets.service';
+import { PlanetSearchComponent } from './planet-search/planet-search.component';
 
 @NgModule({
-  declarations: [AppComponent, PlanetsComponent, PlanetDetailsComponent],
+  declarations: [AppComponent, PlanetsComponent, PlanetDetailsComponent, PlanetSearchComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -21,7 +23,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [PlanetsService],
+  providers: [PlanetsService, SearchPlanetsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

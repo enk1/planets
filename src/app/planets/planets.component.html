@@ -19,7 +19,11 @@
       <span class="select__bar"></span>
     </div>
   </nav>
-
+  <section class="search__wrapper">
+    <div class="search__input">
+      <input type="text" (keyup)="search()" [(ngModel)]="searchingValue" class="search__input">
+    </div>
+  </section>
   <ul class="planets__list">
     <li *ngFor="let planet of planets" routerLink="/detail/{{planet.id}}">
       <div class="planets__info">

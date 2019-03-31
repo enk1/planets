@@ -1,0 +1,20 @@
+@import './../../scss/variables';
+
+.search__wrapper {
+  width: 95%;
+  margin: auto;
+
+  .search__input {
+    box-sizing: border-box;
+    width: 90%;
+    display: block;
+    margin: 1em auto;
+    transition: $main-transition;
+    padding: 3px;
+
+    &:focus {
+      width: 100%;
+      box-shadow: $main-shadow;
+    }
+  }
+}

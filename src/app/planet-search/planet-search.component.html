@@ -1,0 +1,12 @@
+<div class="search__wrapper">
+  <div class="search__input">
+    <input type="text" #searchBox (keyup)="search(searchBox.value)" class="search__input">
+  </div>
+  <ul class="search-result">
+    <li *ngFor="let planet of planets$['results'] | async">
+      <a routerLink="/detail/{{planet.id}}">
+        {{planet.name}}
+      </a>
+    </li>
+  </ul>
+</div>

@@ -82,9 +82,6 @@ export class PlanetsService {
     } else {
       console.error(error);
     }
-    // return new ErrorObservable(
-    //   'Something bad happened; please try again later.'
-    // );
     return PLANETS;
   }
 
